@@ -16,7 +16,7 @@ public class DownloaderTaskFragment extends Fragment {
 
 	private DownloadFinishedListener mCallback;
 	private Context mContext;
-	
+
 	@SuppressWarnings ("unused")
 	private static final String TAG = "Lab-Threads";
 
@@ -28,17 +28,19 @@ public class DownloaderTaskFragment extends Fragment {
 		setRetainInstance(true);
 		
 		// TODO: Create new DownloaderTask that "downloads" data
-
+		DownloaderTask task = new DownloaderTask();
         
 		
 		// TODO: Retrieve arguments from DownloaderTaskFragment
-		// Prepare them for use with DownloaderTask. 
+		// Prepare them for use with DownloaderTask.
+		ArrayList<Integer> resourceIDSlist= getArguments().getIntegerArrayList(MainActivity.TAG_FRIEND_RES_IDS);
+		Integer[] resourceIDS = new Integer[resourceIDSlist.size()];
+		resourceIDSlist.toArray(resourceIDS);
 
-        
-        
-        
-		// TODO: Start the DownloaderTask 
-		
+
+		// TODO: Start the DownloaderTask
+		task.execute(resourceIDS);
+
         
 
 	}
@@ -73,20 +75,22 @@ public class DownloaderTaskFragment extends Fragment {
 	// out). Ultimately, it must also pass newly available data back to 
 	// the hosting Activity using the DownloadFinishedListener interface.
 
-//	public class DownloaderTask extends ... {
-	
+	public class DownloaderTask extends AsyncTask<Integer, Void, String[]> {
 
-    
-    
-    
-    
-    
-    
-    
+		@Override
+		protected String[] doInBackground(Integer... resourceIDS) {
+			return downloadTweets(resourceIDS);
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			MainActivity main = (MainActivity)getActivity();
+			main.notifyDataRefreshed(result);
+
+		}
+
         // TODO: Uncomment this helper method
 		// Simulates downloading Twitter data from the network
-
-        /*
          private String[] downloadTweets(Integer resourceIDS[]) {
 			final int simulatedDelay = 2000;
 			String[] feeds = new String[resourceIDS.length];
@@ -123,15 +127,8 @@ public class DownloaderTaskFragment extends Fragment {
 			}
 
 			return feeds;
-		}
-         */
+         }
 
-
-    
-    
-    
-    
-    
-    
+    }
 
 }
