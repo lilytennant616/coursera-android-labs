@@ -137,7 +137,7 @@ public class DownloaderTaskFragment extends Fragment {
 				 }
 
 				 downLoadCompleted = true;
-				 saveTweetsToFile(feeds);
+				//deleted; saveTweetsToFile(feeds);
 
 			 } catch (IOException e) {
 				 e.printStackTrace();
@@ -244,7 +244,7 @@ public class DownloaderTaskFragment extends Fragment {
 		 // Uncomment this helper method
 		 // Saves the tweets to a file
 
-
+/*
 		 private void saveTweetsToFile(String[] result) {
 			 PrintWriter writer = null;
 			 try {
@@ -263,7 +263,18 @@ public class DownloaderTaskFragment extends Fragment {
 					 writer.close();
 				 }
 			 }
-		 }
+		 }*/
 	 }
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
